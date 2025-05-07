@@ -18,22 +18,22 @@
     <div class="book-main">
         <img src="img/author.jpg" id="image" alt="author image" class="rounded-2 cover">
         <div class="informations">
-            <h2 class="title" id="name">Name</h2>
+            <h2 class="title" id="name">author name</h2>
             <div class="details">
                 <div class="card info">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <table class="table table-borderless">
                                 <tr>
-                                    <th>Nationality</th>
+                                    <th>nationality</th>
                                     <td id="nationailty"></th>
                                 </tr>
                                 <tr>
-                                    <th>Sex</th>
+                                    <th>sex</th>
                                     <td id="sex"></th>
                                 </tr>
                                 <tr>
-                                    <th>Comment</th>
+                                    <th>comment</th>
                                     <td id="comment"></th>
                                 </tr>
                                 <tr>

@@ -35,7 +35,7 @@
             </div>
 
             <div class="col-md-4">
-                <label for="location" class="form-label">Location</label>
+                <label for="location" class="form-label">location</label>
                 <!--se si va a questa pagina dalla pagina della sede allora si mette il nome della sede e lo si rende non modificabile-->
                 <input class="form-control" id="location" list="locations" placeholder="Type to search location..."
                     required="" />
@@ -52,7 +52,7 @@
             </div>
 
             <div class="col-md-4">
-                <label for="author" class="form-label">Author</label>
+                <label for="author" class="form-label">author</label>
                 <input class="form-control" id="author" list="authors" placeholder="Type to search author..."
                     required="" />
                 <datalist id="authors">
@@ -68,7 +68,7 @@
             </div>
 
             <div class="col-md-4">
-                <label for="id" class="form-label">Client's ID</label>
+                <label for="id" class="form-label">client's ID</label>
                 <div class="input-group has-validation">
                     <input class="form-control" id="id" placeholder="example: 0" aria-describedby="inputGroupPrepend"
                         required="" />
@@ -77,7 +77,7 @@
             </div>
 
             <div class="col-md-4">
-                <label for="name" class="form-label">Client's name</label>
+                <label for="name" class="form-label">client's name</label>
                 <div class="input-group has-validation">
                     <input class="form-control" id="name" placeholder="example: Jonathan"
                         aria-describedby="inputGroupPrepend" required="" />
@@ -86,7 +86,7 @@
             </div>
 
             <div class="col-md-4">
-                <label for="mail" class="form-label">Client's mail</label>
+                <label for="mail" class="form-label">client's mail</label>
                 <div class="input-group has-validation">
                     <input class="form-control" id="mail" placeholder="example: name.surname@mail.ex"
                         aria-describedby="inputGroupPrepend" required="" />

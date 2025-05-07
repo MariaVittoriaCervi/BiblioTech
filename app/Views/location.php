@@ -15,7 +15,7 @@
         <img src="img\Logo.png" class="rounded-circle logo" alt="img logo">
         <h1><b>BiblioTech</b></h1>
     </div>
-    <h2 class="title" style="padding-left: 10px;">Location name</h2>
+    <h2 class="title" style="padding-left: 10px;">location name</h2>
     <div class="location-main">
 
         <div class="card location-info">
@@ -23,16 +23,16 @@
                 <li class="list-group-item">
                     <table class="table table-borderless">
                         <tr>
-                            <th>Address</th>
-                            <td>Location's address</th>
+                            <th>address</th>
+                            <td>location's address</th>
                         </tr>
                         <tr>
-                            <th>City</th>
-                            <td>Location's city</th>
+                            <th>city</th>
+                            <td>location's city</th>
                         </tr>
                         <tr>
-                            <th>State</th>
-                            <td>Location's state</th>
+                            <th>state</th>
+                            <td>location's state</th>
                         </tr>
                         <tr>
                     </table>

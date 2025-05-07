@@ -22,8 +22,8 @@
         <th scope="col">Title</th>
         <th scope="col">Original language</th>
         <th scope="col">Genre</th>
-        <th scope="col">Comment</th>
-        <th scope="col">Author</th>
+        <th scope="col">comment</th>
+        <th scope="col">author</th>
       </tr>
     </thead>
     <tbody id="booksTable"> </tbody>

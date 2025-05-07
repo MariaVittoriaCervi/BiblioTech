@@ -2,12 +2,12 @@
 
 namespace App\Controllers;
 
-use CodeIgniter\RESTful\ResourceController;
 use App\Models\BooksModel;
+use CodeIgniter\Controller;
 
-class Locations extends ResourceController
+class Locations extends Controller
 {
-    protected $booksModel; 
+    protected $booksModel;
 
     public function __construct()
     {
@@ -16,8 +16,9 @@ class Locations extends ResourceController
 
     public function index()
     {
-        // Handle GET requests to fetch all locations
         $locations = $this->booksModel->getAllLocations();
-        return $this->respond($locations);
+
+        // Se vuoi restituire JSON (API)
+        return $this->response->setJSON($locations);
     }
 }

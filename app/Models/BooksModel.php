@@ -4,123 +4,69 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class BooksModel extends Model
-{
-    protected $table = 'books'; // Nome della tabella nel database
-    protected $primaryKey = 'id_book'; // Chiave primaria della tabella
-    protected $allowedFields = ['title', 'original_language', 'genre', 'plot', 'comment', 'cover', 'id_author']; // Campi modificabili
+class BooksModel extends Model {
 
-    /**
-     * Recupera tutti i libri
-     */
-    public function getAllBooks()
-    {
-        return $this->findAll(); // Recupera tutti i record dalla tabella
+    protected $db;
+
+    public function __construct() {
+        parent::__construct();
+        $this->db = \Config\Database::connect(); // connetti al database
     }
 
-    /**
-     * Recupera un singolo libro in base all'ID
-     */
-    public function getOneBook($id_book)
-    {
-        return $this->find($id_book); // Recupera un singolo record in base alla chiave primaria
+    public function getAllBooks() {
+        return $this->db->table('books')->get()->getResult();
     }
 
-    /**
-     * Recupera tutti gli autori
-     */
-    public function getAllAuthors()
-    {
-        $db = \Config\Database::connect();
-        $builder = $db->table('authors');
-        return $builder->get()->getResultArray(); // Recupera tutti i record dalla tabella authors
+    public function getOneBook($id_book) {
+        return $this->db->table('books')->where('id_book', $id_book)->get()->getRow();
     }
 
-    /**
-     * Recupera un singolo autore in base all'ID
-     */
-    public function getOneAuthor($id_author)
-    {
-        $db = \Config\Database::connect();
-        $builder = $db->table('authors');
-        return $builder->getWhere(['id_author' => $id_author])->getRowArray(); // Recupera un singolo autore
+    public function getAllAuthors() {
+        return $this->db->table('authors')->get()->getResult();
     }
 
-    /**
-     * Recupera tutti i libri di un autore
-     */
-    public function getBooksFromAuthor($id_author)
-    {
-        return $this->where('id_author', $id_author)->findAll(); // Recupera tutti i libri di un autore specifico
+    public function getOneAuthor($id_author) {
+        return $this->db->table('authors')->where('id_author', $id_author)->get()->getRow();
     }
 
-    /**
-     * Recupera tutte le location
-     */
-    public function getAllLocations()
-    {
-        $db = \Config\Database::connect();
-        $builder = $db->table('locations');
-        return $builder->get()->getResultArray(); // Recupera tutte le location
+    public function getBooksFromAuthor($id_author) {
+        return $this->db->table('books b')
+            ->join('authors a', 'b.id_author = a.id_author')
+            ->where('a.id_author', $id_author)
+            ->get()
+            ->getResult();
     }
 
-    /**
-     * Recupera una singola location in base all'ID
-     */
-    public function getOneLocation($id_location)
-    {
-        $db = \Config\Database::connect();
-        $builder = $db->table('locations');
-        return $builder->getWhere(['id_location' => $id_location])->getRowArray(); // Recupera una singola location
+    public function getAllLocations() {
+        return $this->db->table('locations')->get()->getResult();
     }
 
-    /**
-     * Recupera tutti i libri in una location
-     */
-    public function getBooksInLocation($id_location)
-    {
-        $db = \Config\Database::connect();
-        $builder = $db->table('books');
-        $builder->select('books.*');
-        $builder->join('is_stored', 'books.id_book = is_stored.id_book');
-        $builder->join('locations', 'is_stored.id_location = locations.id_location');
-        $builder->where('locations.id_location', $id_location);
-        return $builder->get()->getResultArray(); // Recupera tutti i libri in una location
+    public function getOneLocation($id_location) {
+        return $this->db->table('locations')->where('id_location', $id_location)->get()->getRow();
     }
 
-    /**
-     * Modifica un libro
-     */
-    public function editBook($data, $id_book)
-    {
-        return $this->update($id_book, $data); // Aggiorna i dati di un libro
+    public function getBooksInLocation($id_location) {
+        return $this->db->table('books b')
+            ->join('is_stored s', 'b.id_book = s.id_book')
+            ->join('locations l', 's.id_location = l.id_location')
+            ->where('l.id_location', $id_location)
+            ->get()
+            ->getResult();
     }
 
-    /**
-     * Aggiunge un nuovo libro
-     */
-    public function addBook($data)
-    {
-        return $this->insert($data); // Inserisce un nuovo libro
+    public function editBook($id_book, $data) {
+        return $this->db->table('books')->where('id_book', $id_book)->update($data);
     }
 
-    /**
-     * Modifica un autore
-     */
-    public function editAuthor($data, $id_author)
-    {
-        $db = \Config\Database::connect();
-        $builder = $db->table('authors');
-        return $builder->update($data, ['id_author' => $id_author]); // Aggiorna i dati di un autore
+    public function addBook($data) {
+        return $this->db->table('books')->insert($data);
     }
 
-    /**
-     * Aggiunge un nuovo autore
-     */
-    public function addAuthor($data)
-    {
-        $db = \Config\Database::connect();
-        $builder = $db->table('authors');
-        return $builder->insert($data); // Inserisce un nuovo autore
+    public function editAuthor($id_author, $data) {
+        return $this->db->table('authors')->where('id_author', $id_author)->update($data);
+    }
+
+    public function addAuthor($data) {
+        return $this->db->table('authors')->insert($data);
     }
 }

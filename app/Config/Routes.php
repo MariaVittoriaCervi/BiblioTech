@@ -7,7 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 // Route per la homepage
-$routes->get('/', 'Views::index');
+$routes->get('/', 'views::index');
 
 // Route per Locations
 $routes->get('/locations', 'Views::locations'); // Mostra pagina di tutte le locations
