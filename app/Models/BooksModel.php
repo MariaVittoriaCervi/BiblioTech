@@ -1,6 +1,7 @@
 <?php
+    namespace App\Models;
     require_once 'Database.php';
-    class BooksModel extends DB {
+    class BooksModel extends \App\Models\DB {
 
         public function getAllBooks(){
             $sql = "SELECT * FROM books;";
