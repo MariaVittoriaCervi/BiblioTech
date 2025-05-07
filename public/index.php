@@ -20,9 +20,9 @@
     <table class="table table-striped w-50">
       <thead>
         <tr>
-          <th scope="col">country#</th>
-          <th scope="col">city</th>
-          <th scope="col">address</th>
+          <th scope="col">Country</th>
+          <th scope="col">City</th>
+          <th scope="col">Address</th>
         </tr>
       </thead>
       <tbody id="locationsTable"> </tbody>

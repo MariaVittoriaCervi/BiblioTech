@@ -25,19 +25,19 @@
                         <li class="list-group-item">
                             <table class="table table-borderless">
                                 <tr>
-                                    <th>author</th>
+                                    <th>Author</th>
                                     <td id="authorName"></th>
                                 </tr>
                                 <tr>
-                                    <th>genre</th>
+                                    <th>Genre</th>
                                     <td id="genre"></th>
                                 </tr>
                                 <tr>
-                                    <th>original language</th>
+                                    <th>Original language</th>
                                     <td id="language"></th>
                                 </tr>
                                 <tr>
-                                    <th>comment</th>
+                                    <th>Comment</th>
                                     <td id="comment"></th>
                                 </tr>
                             </table>
