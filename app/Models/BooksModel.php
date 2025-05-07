@@ -1,6 +1,6 @@
 <?php
     require_once 'Database.php';
-    class BooksDB extends DB {
+    class BooksModel extends DB {
 
         public function getAllBooks(){
             $sql = "SELECT * FROM books;";

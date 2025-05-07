@@ -41,8 +41,8 @@
           </p>
         </blockquote>
         <div class="btn-group mt-3">
-          <a href="http://http://localhost/BiblioTech/public/books" class="btn btn-primary">All books</a> 
-          <a href="../app/Controllers/Authors.php" class="btn btn-primary">All authors</a>
+          <a href="http://localhost/BiblioTech/public/books" class="btn btn-primary">All books</a> 
+          <a href="http://localhost/BiblioTech/public/authors" class="btn btn-primary">All authors</a>
         </div>
       </div>
     </div>
