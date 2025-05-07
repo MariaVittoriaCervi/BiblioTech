@@ -7,7 +7,7 @@ use App\Models\BooksModel;
 
 class Locations extends ResourceController
 {
-    protected $booksModel;
+    protected $booksModel; 
 
     public function __construct()
     {

@@ -1,5 +1,7 @@
 <?php
+namespace App\Models;
 
+use mysqli; 
     class DB {
 	    private $host;
 	    private $user;
