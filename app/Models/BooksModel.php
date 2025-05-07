@@ -1,172 +1,126 @@
 <?php
-    require_once 'Database.php';
-    class BooksModel extends DB {
 
-        public function getAllBooks(){
-            $sql = "SELECT * FROM books;";
-            $result = $this->connect()->query($sql);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $dati[] = $row;
-                }
-                return $dati;
-            }
-            return null; 
-        }
+namespace App\Models;
 
-        public function getOneBook($id_book){
-            $sql = "SELECT * FROM books
-                    WHERE id_book = '{$id_book}';";
-            $result = $this->connect()->query($sql);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $dati[] = $row;
-                }
-                return $dati;
-            }
-            return null; 
-        }
+use CodeIgniter\Model;
 
-        public function getAllAuthors(){
-            $sql = "SELECT * FROM authors;";
-            $result = $this->connect()->query($sql);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $dati[] = $row;
-                }
-                return $dati;
-            }
-            return null; 
-        }
+class BooksModel extends Model
+{
+    protected $table = 'books'; // Nome della tabella nel database
+    protected $primaryKey = 'id_book'; // Chiave primaria della tabella
+    protected $allowedFields = ['title', 'original_language', 'genre', 'plot', 'comment', 'cover', 'id_author']; // Campi modificabili
 
-        public function getOneAuthor($id_author){
-            $sql = "SELECT * FROM authors
-                    WHERE id_author = '{$id_author}';";
-            $result = $this->connect()->query($sql);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $dati[] = $row;
-                }
-                return $dati;
-            }
-            return null; 
-        }
-
-        public function getBooksFromAuthor($id_author){
-            $sql = "SELECT * FROM books b
-                    INNER JOIN authors a ON b.id_author = a.id_author
-                    WHERE a.id_author = '{$id_author}';";
-            $result = $this->connect()->query($sql);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $dati[] = $row;
-                }
-                return $dati;
-            }
-            return null; 
-        }
-
-        public function getAllLocations(){
-            $sql = "SELECT * FROM locations;";
-            $result = $this->connect()->query($sql);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $dati[] = $row;
-                }
-                return $dati;
-            }
-            return null; 
-        }
-
-        public function getOneLocation($id_location){
-            $sql = "SELECT * FROM locations
-                    WHERE id_location = '{$id_location}';";
-            $result = $this->connect()->query($sql);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $dati[] = $row;
-                }
-                return $dati;
-            }
-            return null; 
-        }
-
-        public function getBooksInLocation($id_location){
-            $sql = "SELECT * FROM books b
-                    INNER JOIN is_stored s ON b.id_book = s.id_book
-                    INNER JOIN locations l ON s.id_location = l.id_location
-                    WHERE l.id_location = '{$id_location}';";
-            $result = $this->connect()->query($sql);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $dati[] = $row;
-                }
-                return $dati;
-            }
-            return null;
-        }
-
-        public function editBook($title, $original_language, $genre, $plot, $comment, $cover, $id_author, $id_book){
-            $sql = "UPDATE books
-                    SET title = '{$title}',
-                        original_language = '{$original_language}',
-                        genre = '{$genre}',
-                        plot = '{$plot}',
-                        comment = '{$comment}',
-                        cover = '{$cover}',
-                        id_author = '{$id_author}'
-                    WHERE id_book = '{$id_book}';";
-            $result = $this->connect()->query($sql);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $dati[] = $row;
-                }
-                return $dati;
-            }
-            return null;
-        }
-
-        public function addBook($title, $original_language, $genre, $plot, $comment, $cover, $id_author){
-            $sql = "INSERT INTO books (title, original_language, genre, plot, comment, cover, id_author)
-                    VALUES ('{$title}', '{$original_language}', '{$genre}', '{$plot}', '{$comment}', '{$cover}', '{$id_author}');";
-            $result = $this->connect()->query($sql);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $dati[] = $row;
-                }
-                return $dati;
-            }
-            return null;
-        }
-
-        public function editAuthor($name, $nationality, $sex, $picture, $id_author){
-            $sql = "UPDATE authors
-                    SET name = '{$name}',
-                        nationality = '{$nationality}',
-                        sex = '{$sex}',
-                        picture = '{$picture}'
-                    WHERE id_author = '{$id_author}';";
-            $result = $this->connect()->query($sql);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $dati[] = $row;
-                }
-                return $dati;
-            }
-            return null;
-        }
-
-        public function addAuthor($name, $nationality, $sex, $picture){
-            $sql = "INSERT INTO authors (name, nationality, sex, picture)
-                    VALUES ('$name', '$nationality', '$sex', '$picture');";
-            $result = $this->connect()->query($sql);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $dati[] = $row;
-                }
-                return $dati;
-            }
-            return null;
-        }
-
+    /**
+     * Recupera tutti i libri
+     */
+    public function getAllBooks()
+    {
+        return $this->findAll(); // Recupera tutti i record dalla tabella
     }
+
+    /**
+     * Recupera un singolo libro in base all'ID
+     */
+    public function getOneBook($id_book)
+    {
+        return $this->find($id_book); // Recupera un singolo record in base alla chiave primaria
+    }
+
+    /**
+     * Recupera tutti gli autori
+     */
+    public function getAllAuthors()
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('authors');
+        return $builder->get()->getResultArray(); // Recupera tutti i record dalla tabella authors
+    }
+
+    /**
+     * Recupera un singolo autore in base all'ID
+     */
+    public function getOneAuthor($id_author)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('authors');
+        return $builder->getWhere(['id_author' => $id_author])->getRowArray(); // Recupera un singolo autore
+    }
+
+    /**
+     * Recupera tutti i libri di un autore
+     */
+    public function getBooksFromAuthor($id_author)
+    {
+        return $this->where('id_author', $id_author)->findAll(); // Recupera tutti i libri di un autore specifico
+    }
+
+    /**
+     * Recupera tutte le location
+     */
+    public function getAllLocations()
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('locations');
+        return $builder->get()->getResultArray(); // Recupera tutte le location
+    }
+
+    /**
+     * Recupera una singola location in base all'ID
+     */
+    public function getOneLocation($id_location)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('locations');
+        return $builder->getWhere(['id_location' => $id_location])->getRowArray(); // Recupera una singola location
+    }
+
+    /**
+     * Recupera tutti i libri in una location
+     */
+    public function getBooksInLocation($id_location)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('books');
+        $builder->select('books.*');
+        $builder->join('is_stored', 'books.id_book = is_stored.id_book');
+        $builder->join('locations', 'is_stored.id_location = locations.id_location');
+        $builder->where('locations.id_location', $id_location);
+        return $builder->get()->getResultArray(); // Recupera tutti i libri in una location
+    }
+
+    /**
+     * Modifica un libro
+     */
+    public function editBook($data, $id_book)
+    {
+        return $this->update($id_book, $data); // Aggiorna i dati di un libro
+    }
+
+    /**
+     * Aggiunge un nuovo libro
+     */
+    public function addBook($data)
+    {
+        return $this->insert($data); // Inserisce un nuovo libro
+    }
+
+    /**
+     * Modifica un autore
+     */
+    public function editAuthor($data, $id_author)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('authors');
+        return $builder->update($data, ['id_author' => $id_author]); // Aggiorna i dati di un autore
+    }
+
+    /**
+     * Aggiunge un nuovo autore
+     */
+    public function addAuthor($data)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('authors');
+        return $builder->insert($data); // Inserisce un nuovo autore
+    }
+}
