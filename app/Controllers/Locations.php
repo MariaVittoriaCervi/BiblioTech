@@ -18,7 +18,8 @@ class Locations extends Controller
     {
         $locations = $this->booksModel->getAllLocations();
 
-        // Se vuoi restituire JSON (API)
-        return $this->response->setJSON($locations);
+        $data = json_encode($locations)
+
+        return view('index', $data);
     }
 }
