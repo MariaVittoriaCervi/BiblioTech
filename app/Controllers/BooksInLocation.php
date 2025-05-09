@@ -2,10 +2,10 @@
 
 namespace App\Controllers;
 
-use CodeIgniter\RESTful\ResourceController;
 use App\Models\BooksModel;
+use CodeIgniter\Controller;
 
-class BooksInLocation extends ResourceController
+class BooksInLocation extends Controller
 {
     protected $booksModel;
 
@@ -16,11 +16,15 @@ class BooksInLocation extends ResourceController
 
     public function index()
     {
+        // Recupera l'ID della location dai parametri GET
         $id_location = $this->request->getGet('id_location');
 
-        // Handle GET requests to fetch books in a location
+        // Ottieni tutti i libri nella location specifica
         $books = $this->booksModel->getBooksInLocation($id_location);
-        return $this->respond($books);
-    }
 
+        // Passa i dati dei libri alla view
+        $data = ['books' => $books];
+
+        return view('books', $data);
+    }
 }

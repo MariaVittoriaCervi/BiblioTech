@@ -1,11 +1,12 @@
 <?php
+<?php
 
 namespace App\Controllers;
 
-use CodeIgniter\RESTful\ResourceController;
 use App\Models\BooksModel;
+use CodeIgniter\Controller;
 
-class Authors extends ResourceController
+class Authors extends Controller
 {
     protected $booksModel;
 
@@ -16,8 +17,12 @@ class Authors extends ResourceController
 
     public function index()
     {
-        // Handle GET requests to fetch all authors
+        // Fetch all authors from the model
         $authors = $this->booksModel->getAllAuthors();
-        return $this->respond($authors);
+
+        // Pass the authors data to the view
+        $data = ['authors' => $authors];
+
+        return view('authors', $data);
     }
 }

@@ -1,11 +1,12 @@
 <?php
+<?php
 
 namespace App\Controllers;
 
-use CodeIgniter\RESTful\ResourceController;
 use App\Models\BooksModel;
+use CodeIgniter\Controller;
 
-class OneBook extends ResourceController
+class OneBook extends Controller
 {
     protected $booksModel;
 
@@ -16,11 +17,15 @@ class OneBook extends ResourceController
 
     public function index()
     {
+        // Recupera l'ID del libro dai parametri GET
         $id_book = $this->request->getGet('id_book');
 
-        // Handle GET requests to fetch one book
+        // Ottieni i dati del libro specifico
         $book = $this->booksModel->getOneBook($id_book);
-        return $this->respond($book);
-    }
 
+        // Passa i dati del libro alla view
+        $data = ['book' => $book];
+
+        return view('book', $data);
+    }
 }

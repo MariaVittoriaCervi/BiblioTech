@@ -1,11 +1,12 @@
 <?php
+<?php
 
 namespace App\Controllers;
 
-use CodeIgniter\RESTful\ResourceController;
 use App\Models\BooksModel;
+use CodeIgniter\Controller;
 
-class OneLocation extends ResourceController
+class OneLocation extends Controller
 {
     protected $booksModel;
 
@@ -16,11 +17,15 @@ class OneLocation extends ResourceController
 
     public function index()
     {
+        // Recupera l'ID della location dai parametri GET
         $id_location = $this->request->getGet('id_location');
 
-        // Handle GET requests to fetch one location
+        // Ottieni i dati della location specifica
         $location = $this->booksModel->getOneLocation($id_location);
-        return $this->respond($location);
-    }
 
+        // Passa i dati della location alla view
+        $data = ['location' => $location];
+
+        return view('location', $data);
+    }
 }

@@ -1,4 +1,5 @@
 <?php
+<?php
 
 namespace App\Controllers;
 
@@ -16,9 +17,11 @@ class Locations extends Controller
 
     public function index()
     {
+        // Fetch all locations from the model
         $locations = $this->booksModel->getAllLocations();
 
-        $data = json_encode($locations)
+        // Pass the locations data as an associative array
+        $data = ['locations' => $locations];
 
         return view('index', $data);
     }

@@ -2,10 +2,10 @@
 
 namespace App\Controllers;
 
-use CodeIgniter\RESTful\ResourceController;
 use App\Models\BooksModel;
+use CodeIgniter\Controller;
 
-class OneAuthor extends ResourceController
+class OneAuthor extends Controller
 {
     protected $booksModel;
 
@@ -16,11 +16,15 @@ class OneAuthor extends ResourceController
 
     public function index()
     {
+        // Recupera l'ID dell'autore dai parametri GET
         $id_author = $this->request->getGet('id_author');
 
-        // Handle GET requests to fetch one author
+        // Ottieni i dati dell'autore specifico
         $author = $this->booksModel->getOneAuthor($id_author);
-        return $this->respond($author);
-    }
 
+        // Passa i dati dell'autore alla view
+        $data = ['author' => $author];
+
+        return view('author', $data);
+    }
 }
